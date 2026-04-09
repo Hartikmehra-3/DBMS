@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Modules | Roshan Das DBMS</title>
+    <style>
+      /* --- CORE THEME --- */
+      :root {
+        --bg-dark: #020f0a;
+        --sql-cyan: #00d2ff;
+        --emerald: #10b981;
+        --glass: rgba(255, 255, 255, 0.03);
+        --text-main: #f8fafc;
+        --text-dim: #94a3b8;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", "Segoe UI", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        min-height: 100vh;
+        padding: 40px 20px;
+        background-image: radial-gradient(
+          circle at top left,
+          rgba(0, 210, 255, 0.08),
+          transparent 40%
+        );
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease;
+      }
+
+      header p {
+        color: var(--emerald);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        background: linear-gradient(to right, #fff, var(--sql-cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+      }
+
+      /* --- TOPIC GRID --- */
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+      }
+
+      .topic-card {
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topic-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--sql-cyan);
+        opacity: 0.3;
+        transition: 0.3s;
+      }
+
+      .topic-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.06);
+        border-color: var(--sql-cyan);
+        box-shadow: 0 15px 30px rgba(0, 210, 255, 0.1);
+      }
+
+      .topic-card:hover::before {
+        opacity: 1;
+        box-shadow: 0 0 15px var(--sql-cyan);
+      }
+
+      .topic-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+        color: var(--sql-cyan);
+      }
+
+      .topic-card p {
+        font-size: 0.95rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      /* --- VIEW BUTTON --- */
+      .status-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border: 1px solid rgba(0, 210, 255, 0.3);
+        width: fit-content;
+        transition: 0.3s;
+        background: rgba(0, 210, 255, 0.05);
+        color: var(--sql-cyan);
+      }
+
+      .topic-card:hover .status-btn {
+        background: var(--sql-cyan);
+        color: #020f0a;
+        box-shadow: 0 0 15px var(--sql-cyan);
+      }
+
+      .back-home {
+        display: block;
+        width: fit-content;
+        margin: 60px auto 0;
+        padding: 15px 40px;
+        background: #0f172a;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: 0.3s;
+      }
+
+      .back-home:hover {
+        background: #1e293b;
+        border-color: var(--emerald);
+        transform: scale(1.05);
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2.2rem;
+        }
+        .topic-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <p>Oracle SQL Mastery • Roshan Das</p>
+        <h1>SQL Practice Modules</h1>
+      </header>
+
+      <div class="topic-grid">
+        <a href="DDL.html" class="topic-card">
+          <div>
+            <h3>DDL Commands</h3>
+            <p>
+              Create, Alter, Drop, Truncate, Rename - Defining database
+              structures.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="DML.html" class="topic-card">
+          <div>
+            <h3>DML Commands</h3>
+            <p>Insert, Update, Delete - Managing data within your tables.</p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="DQL.html" class="topic-card">
+          <div>
+            <h3>DQL: Select Statement</h3>
+            <p>
+              Data Retrieval, basic projections, and column selection logic.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="WHERE.html" class="topic-card">
+          <div>
+            <h3>Where & Order By</h3>
+            <p>
+              Advanced filtering, sorting results, and managing column aliases.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="LIKE.html" class="topic-card">
+          <div>
+            <h3>Pattern Matching</h3>
+            <p>
+              Harness wildcards and the LIKE operator for intelligent searches.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="GROUP.html" class="topic-card">
+          <div>
+            <h3>Group Functions</h3>
+            <p>
+              Aggregating data with Group By, Having, and statistical functions.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="JOINS.html" class="topic-card">
+          <div>
+            <h3>Joins & Subqueries</h3>
+            <p>
+              Connecting tables (Inner, Outer) and implementing nested logic.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="SCALAR.html" class="topic-card">
+          <div>
+            <h3>Scalar Functions</h3>
+            <p>
+              Working with Numeric, String, and built-in Date transformation
+              functions.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="SETS.html" class="topic-card">
+          <div>
+            <h3>Set Operators</h3>
+            <p>Combining query results using Union, Intersect, and Minus.</p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="VIEWS.html" class="topic-card">
+          <div>
+            <h3>Views & Materialized Views</h3>
+            <p>
+              Creating virtual abstractions and snapshot-based data storage.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="TCL_DCL.html" class="topic-card">
+          <div>
+            <h3>TCL & DCL Commands</h3>
+            <p>
+              Transaction control (Commit/Rollback) and Security (Grant/Revoke).
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+      </div>
+
+      <a href="roshan.html" class="back-home">Back to Home Portal</a>
+    </div>
+  </body>
+</html>
+

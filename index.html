@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMS Portal | Emerald Edition</title>
+    <style>
+      /* --- CSS VARIABLES & RESET --- */
+      :root {
+        --bg-dark: #020f0a;
+        --emerald-primary: #10b981;
+        --emerald-secondary: #059669;
+        --sql-cyan: #00d2ff;
+        --plsql-purple: #a855f7;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --text-light: #ecfdf5;
+        --text-dim: #6ee7b7;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* --- DYNAMIC EMERALD BACKGROUND --- */
+      .glass-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(16, 185, 129, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(5, 150, 105, 0.15) 0%,
+            transparent 40%
+          );
+      }
+
+      /* --- MAIN CONTAINER --- */
+      .container {
+        width: 90%;
+        max-width: 1000px;
+        padding: 3.5rem 2rem;
+        background: rgba(2, 15, 10, 0.8);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 40px;
+        backdrop-filter: blur(25px);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+        position: relative;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .subtitle {
+        text-transform: uppercase;
+        letter-spacing: 6px;
+        font-size: 0.85rem;
+        color: var(--text-dim);
+        font-weight: 300;
+      }
+
+      .glimmer-text {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin: 10px 0;
+        background: linear-gradient(90deg, #fff, var(--emerald-primary), #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: glimmer 5s linear infinite;
+      }
+
+      .divider {
+        height: 3px;
+        width: 100px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--emerald-primary),
+          transparent
+        );
+        margin: 0 auto;
+      }
+
+      /* --- ADJUSTED INFO GRID (2x2 Layout) --- */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 3rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .info-card {
+        background: var(--glass-bg);
+        padding: 1.2rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .info-card:hover {
+        border-color: var(--emerald-primary);
+        background: rgba(16, 185, 129, 0.05);
+        transform: translateY(-3px);
+      }
+
+      .label {
+        display: block;
+        font-size: 0.65rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        letter-spacing: 2px;
+      }
+
+      .value {
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+
+      /* --- PORTAL BOXES --- */
+      .main-actions {
+        display: flex;
+        gap: 20px;
+      }
+
+      .portal-box {
+        flex: 1;
+        text-decoration: none;
+        color: inherit;
+        padding: 2.5rem 1.5rem;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .sql-theme:hover {
+        border-color: var(--sql-cyan);
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);
+      }
+      .plsql-theme:hover {
+        border-color: var(--plsql-purple);
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+      }
+
+      .box-content h2 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+      .box-content p {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+      }
+
+      .action-btn {
+        display: inline-block;
+        padding: 8px 25px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: 0.3s ease;
+      }
+
+      .sql-theme .action-btn {
+        color: var(--sql-cyan);
+      }
+      .plsql-theme .action-btn {
+        color: var(--plsql-purple);
+      }
+
+      .sql-theme:hover .action-btn {
+        background: var(--sql-cyan);
+        color: #000;
+      }
+      .plsql-theme:hover .action-btn {
+        background: var(--plsql-purple);
+        color: #fff;
+      }
+
+      @keyframes glimmer {
+        to {
+          background-position: 200% center;
+        }
+      }
+      .fade-in {
+        animation: fadeInMove 1.2s ease forwards;
+      }
+      @keyframes fadeInMove {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-actions {
+          flex-direction: column;
+        }
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+        .glimmer-text {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-bg"></div>
+
+    <div class="container">
+      <header class="fade-in">
+        <p class="subtitle">Database Management System</p>
+        <h1 class="glimmer-text">Project Portfolio</h1>
+        <div class="divider"></div>
+      </header>
+
+      <section class="info-grid">
+        <div class="info-card">
+          <span class="label">Student Name</span>
+          <span class="value">Hartik</span>
+        </div>
+        <div class="info-card">
+          <span class="label">Class</span>
+          <span class="value">BCA IV SEM</span>
+        </div>
+        <div class="info-card">
+          <span class="label">Roll No.</span>
+          <span class="value">7051/24</span>
+        </div>
+        <div class="info-card">
+          <span class="label">Professor Name</span>
+          <span class="value">Mr. Chetan Gupta</span>
+        </div>
+      </section>
+
+      <div class="main-actions">
+        <a href="hartiksql.html" class="portal-box sql-theme">
+          <div class="box-content">
+            <h2>SQL</h2>
+            <p>Relational Data & Queries</p>
+            <div class="action-btn">Queries</div>
+          </div>
+        </a>
+
+        <a href="hartikpl.html" class="portal-box plsql-theme">
+          <div class="box-content">
+            <h2>PL/SQL</h2>
+            <p>Procedural Logic & Blocks</p>
+            <div class="action-btn">Queries</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
+

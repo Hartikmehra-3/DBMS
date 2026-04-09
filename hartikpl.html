@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PL/SQL Modules | Roshan Das DBMS</title>
+    <style>
+      /* --- CORE THEME --- */
+      :root {
+        --bg-dark: #020f0a;
+        --plsql-purple: #a855f7;
+        --emerald: #10b981;
+        --glass: rgba(255, 255, 255, 0.03);
+        --text-main: #f8fafc;
+        --text-dim: #94a3b8;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", "Segoe UI", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        min-height: 100vh;
+        padding: 40px 20px;
+        /* Purple glow for PL/SQL */
+        background-image: radial-gradient(
+          circle at top right,
+          rgba(168, 85, 247, 0.08),
+          transparent 40%
+        );
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease;
+      }
+
+      header p {
+        color: var(--emerald);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        background: linear-gradient(to right, #fff, var(--plsql-purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+      }
+
+      /* --- TOPIC GRID --- */
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+      }
+
+      .topic-card {
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topic-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--plsql-purple);
+        opacity: 0.3;
+        transition: 0.3s;
+      }
+
+      .topic-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.06);
+        border-color: var(--plsql-purple);
+        box-shadow: 0 15px 30px rgba(168, 85, 247, 0.15);
+      }
+
+      .topic-card:hover::before {
+        opacity: 1;
+        box-shadow: 0 0 15px var(--plsql-purple);
+      }
+
+      .topic-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+        color: var(--plsql-purple);
+      }
+
+      .topic-card p {
+        font-size: 0.95rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      /* --- VIEW BUTTON --- */
+      .status-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        width: fit-content;
+        transition: 0.3s;
+        background: rgba(168, 85, 247, 0.05);
+        color: var(--plsql-purple);
+      }
+
+      .topic-card:hover .status-btn {
+        background: var(--plsql-purple);
+        color: #fff;
+        box-shadow: 0 0 15px var(--plsql-purple);
+      }
+
+      .back-home {
+        display: block;
+        width: fit-content;
+        margin: 60px auto 0;
+        padding: 15px 40px;
+        background: #0f172a;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: 0.3s;
+      }
+
+      .back-home:hover {
+        background: #1e293b;
+        border-color: var(--emerald);
+        transform: scale(1.05);
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2.2rem;
+        }
+        .topic-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <p>Procedural Language Oracle • Roshan Das</p>
+        <h1>PL/SQL Practice Modules</h1>
+      </header>
+
+      <div class="topic-grid">
+        <a href="PL_SQL_OUTPUT.html" class="topic-card">
+          <div>
+            <h3>Output, Datatypes & Variables</h3>
+            <p>
+              Master DBMS_OUTPUT statements, scalar datatypes, and constant
+              declarations.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="DECISION_CONTROL.html" class="topic-card">
+          <div>
+            <h3>Decision Control Statements</h3>
+            <p>
+              Implementing conditional logic using IF-THEN-ELSIF and CASE
+              expressions.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="LOOPS.html" class="topic-card">
+          <div>
+            <h3>Iterative Control Statements</h3>
+            <p>
+              Efficient looping structures: Simple, While, and Numeric For
+              Loops.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="ROW_TYPE.html" class="topic-card">
+          <div>
+            <h3>Select, %TYPE & %ROWTYPE</h3>
+            <p>
+              Using dynamic anchoring to keep your variables synced with table
+              structures.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="CURSORS.html" class="topic-card">
+          <div>
+            <h3>Cursors Management</h3>
+            <p>
+              Handling multi-row result sets with Explicit and Parameterized
+              cursors.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="ST_PRO_FUN.html" class="topic-card">
+          <div>
+            <h3>Procedures & Functions</h3>
+            <p>
+              Modularizing code into reusable Stored Procedures and Stored
+              Functions.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="PACKAGES.html" class="topic-card">
+          <div>
+            <h3>PL/SQL Packages</h3>
+            <p>
+              Advanced encapsulation: Grouping logic into Package Specifications
+              and Bodies.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="EXCE_HAND.html" class="topic-card">
+          <div>
+            <h3>Exception Handling</h3>
+            <p>
+              Building robust code with pre-defined and custom error handling
+              blocks.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+
+        <a href="TRIGGERS.html" class="topic-card">
+          <div>
+            <h3>Database Triggers</h3>
+            <p>
+              Automating tasks with Row-level and Statement-level Before/After
+              triggers.
+            </p>
+          </div>
+          <span class="status-btn">VIEW</span>
+        </a>
+      </div>
+
+      <a href="index.html" class="back-home">Back to Home Portal</a>
+    </div>
+  </body>
+</html>
+
